@@ -13,8 +13,8 @@ Para nao expor credenciais no GitHub, este projeto usa arquivo `.env`.
 Exemplo:
 
 ```env
-SUPABASE_URL=https://zwqswablniuywocnwysc.supabase.co/
-SUPABASE_ANON_KEY=sua_chave_anon_aqui
+SUPABASE_URL= (URL tá no grupo)
+SUPABASE_ANON_KEY= (Chave ta no grupo)
 ```
 
 O arquivo `.env` esta no `.gitignore` e nao deve ser versionado.
