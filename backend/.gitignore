@@ -1,5 +1,0 @@
-# Dependencias instaladas localmente
-node_modules/
-
-# Arquivos de ambiente local (nao subir no GitHub)
-.env
