@@ -18,9 +18,16 @@ function App() {
   }, []);
 
   const fetchAnimais = async () => {
-    const { data, error } = await supabase.from('animais').select('*');
-    if (error) console.error(error);
-    else setAnimais(data);
+    try {
+      const { data, error } = await supabase.from('animais').select('*');
+      if (error) {
+        console.error('Erro ao buscar animais:', error);
+        return;
+      }
+      setAnimais(data || []);
+    } catch (err) {
+      console.error('Falha de rede ao buscar animais:', err);
+    }
   };
 
   const handleChange = (e) => {
@@ -29,12 +36,21 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase.from('animais').insert([animal]);
-    if (error) alert('Erro: ' + error.message);
-    else {
+    try {
+      const { error } = await supabase.from('animais').insert([animal]);
+      if (error) {
+        alert('Erro: ' + error.message);
+        return;
+      }
+
       alert('Animal registrado com sucesso!');
       setAnimal({ nome:'', idade:'', raca:'', peso:'', sexo:'', dono:'' });
       fetchAnimais();
+    } catch (err) {
+      console.error('Falha de rede ao registrar animal:', err);
+      alert(
+        'Erro de rede ao acessar Supabase. Confirme a internet, o REACT_APP_SUPABASE_URL/KEY no .env e reinicie o npm start.'
+      );
     }
   };
 
@@ -47,7 +63,7 @@ return (
     </div>
 
     <div className="form-coluna">
-      <h1>📝 Registrar Animal</h1>
+      <h1>Registrar Animal</h1>
       <form onSubmit={handleSubmit}>
         <label>Nome:</label>
         <input 
@@ -111,13 +127,13 @@ return (
           required 
         />
 
-        <button type="submit">🐾 Registrar Animal</button>
+        <button type="submit"> Registrar Animal</button>
       </form>
     </div>
 
     {/* COLUNA DIREITA - LISTA */}
     <div className="lista-coluna">
-      <h2>🐈 Animais Cadastrados</h2>
+      <h2>Animais Cadastrados</h2>
       <ul>
         {animais.map(a => (
           <li key={a.id}>
