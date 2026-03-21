@@ -1,4 +1,4 @@
-# Meu Projeto Supabase - Registro de Animais
+# Registro de Animais
 
 **Trabalho da Faculdade** - Aplicação web para cadastro e listagem de animais de estimação, construída com **React** e **Supabase**.
 
@@ -54,12 +54,4 @@
 
 1. Preencha o formulário com dados do animal
 2. Clique em **Registrar**
-3. Veja a lista atualizada abaixo!
-
-## Testes
-
-```bash
-npm test
-```
-npm run build
-```
+3. Veja a lista atualizada abaixo
